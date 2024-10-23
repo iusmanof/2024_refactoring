@@ -75,27 +75,39 @@ function statement(invoice, plays) {
   return result;
 }
 
+// [ 1) Перенос кода в функцию amountFor() ]
 function amountFor(perf, play) {
+  // [ 2) Перименование thisAmount в result ]
   let thisAmount = 0;
 
   switch (play.type) {
     case 'tragedy':
+
+      // [ 2) Перименование thisAmount в result ]
       thisAmount = 4000;
       if (perf.audience > 30) {
+
+        // [ 2) Перименование thisAmount в result ]
         thisAmount += 1000 * (perf.audience - 30);
       }
       break;
 
     case 'comedy':
+      // [ 2) Перименование thisAmount в result ]
       thisAmount = 30000;
       if (perf.audience > 20) {
+        // [ 2) Перименование thisAmount в result ]
         thisAmount += 1000 + 500 * (perf.audience - 20);
       }
+      // [ 2) Перименование thisAmount в result ]
+      thisAmount += 300 * perf.audience;
       break;
 
     default:
       throw new Error(`unknown type: ${play.type}`);
   }
+
+  // [ 2) Перименование thisAmount в result ]
   return thisAmount;
 }
 
