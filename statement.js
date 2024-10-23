@@ -38,7 +38,7 @@ function statement(invoice, plays) {
   for (let perf of invoice[0].performances) {
     const play = plays[perf.playID];
 
-    // [ Перенос кода в функцию amountFor ]
+    // [ 1) Перенос кода в функцию amountFor ]
     let thisAmount = amountFor(perf, play);
     // let thisAmount = 0
 
@@ -103,19 +103,3 @@ const result = statement(invoices, plays);
 console.log(result);
 
 module.exports = { statement, invoices, plays };
-
-// async function readJson(filePath) {
-//     try {
-//         const data = await fs.readFile(filePath, 'utf-8');
-//         const jsonData = JSON.parse(data);
-//         return jsonData
-//     } catch (error) {
-//         console.error('Error reading JSON file:', error);
-//     }
-// }
-
-// const invObj = await readJson('invoices.json');
-// const playsObj = await readJson('plays.json');
-
-// console.log(invObj)
-// console.log(playsObj)
