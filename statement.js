@@ -75,8 +75,9 @@ function statement(invoice, plays) {
   return result;
 }
 
-// [ 1) Перенос кода в функцию amountFor() ]
-function amountFor(perf, play) {
+// [ 1) Перенос кода в функцию amountFor()]
+// [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+function amountFor(aPerfomance, play) {
   // [ 2) Перименование thisAmount в result ]
   let result = 0;
 
@@ -85,22 +86,27 @@ function amountFor(perf, play) {
 
       // [ 2) Перименование thisAmount в result ]
       result = 4000;
-      if (perf.audience > 30) {
+      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+      if (aPerfomance.audience > 30) {
 
         // [ 2) Перименование thisAmount в result ]
-        result += 1000 * (perf.audience - 30);
+        // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+        result += 1000 * (aPerfomance.audience - 30);
       }
       break;
 
     case 'comedy':
       // [ 2) Перименование thisAmount в result ]
       result = 30000;
-      if (perf.audience > 20) {
+      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+      if (aPerfomance.audience > 20) {
         // [ 2) Перименование thisAmount в result ]
-        result += 1000 + 500 * (perf.audience - 20);
+        // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+        result += 1000 + 500 * (aPerfomance.audience - 20);
       }
       // [ 2) Перименование thisAmount в result ]
-      result += 300 * perf.audience;
+      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
+      result += 300 * aPerfomance.audience;
       break;
 
     default:
