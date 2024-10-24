@@ -24,8 +24,6 @@ const plays = {
   othello: { name: 'Othello', type: 'tragedy' },
 };
 
-// [ 8) замена переменной volumeCredits]
-// [ 9) aParam and var-result ]
 function volumeCreditsFor(aPerfomance){
   let result = 0;
   result += Math.max(aPerfomance.audience - 30, 0);
@@ -39,98 +37,37 @@ function statement(invoice, plays) {
   let volumeCredits = 0;
 
   let result = `Statement for ${invoice[0].customer}\n`;
-  // [ 10) замена временной переменной format(aNumber)]
-  // const format = new Intl.NumberFormat('en-US', {
-  //   style: 'currency',
-  //   currency: 'USD',
-  //   minimumFractionDigits: 2,
-  // }).format;
 
   for (let perf of invoice[0].performances) {
-    // [ 8) замена переменной volumeCredits]
     volumeCredits += volumeCreditsFor(perf)
-    // [ 4) Замена временной переменной ]
-    // const play = plays[perf.playID];
-    // const play = playFor(perf);
-
-    // [ 1) Перенос кода в функцию amountFor() ]
-    // [ 5) встраивание переменной playFor(perf)]
     let thisAmount = amountFor(perf, playFor(perf));
-    // let thisAmount = 0
 
-    // switch(play.type){
-    //     case "tragedy":
-    //         thisAmount = 4000
-    //         if(perf.audience > 30){
-    //             thisAmount += 1000 * (perf.audience - 30)
-    //         }
-    //         break;
-
-    //     case "comedy":
-    //         thisAmount = 30000
-    //         if(perf.audience > 20){
-    //             thisAmount += 1000 + 500 *(perf.audience - 20)
-    //         }
-    //         break;
-
-    //     default:
-    //         throw new Error (`unknown type: ${play.type}`)
-    // }
-
-    // [ 8) замена переменной volumeCredits]
-    // volumeCredits += Math.max(perf.audience - 30, 0);
-    
-    // // [ 5) встраивание переменной playFor(perf)]
-    // if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
-
-    // [ 5) встраивание переменной playFor(perf)]
-    // [ 7) встраивание переменной amountFor(perf)]
-    // [ 11) rename function]
-    // [ 12) division /100 ]
     result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
     result += `   (${perf.audience} seats)\n`;
-    // [ 7) встраивание переменной amountFor(perf)]
     totalAmount += amountFor(perf);
   }
-  // [ 11) rename function]
-  // [ 12) division /100 ]
   result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
 
-// [ 1) Перенос кода в функцию amountFor()]
-// [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
 function amountFor(aPerfomance, play) {
-  // [ 2) Перименование thisAmount в result ]
   let result = 0;
 
-  // [ 6) изменение обьявления функции playFor(aPerfomance)]
   switch (playFor(aPerfomance).type) {
     case 'tragedy':
 
-      // [ 2) Перименование thisAmount в result ]
       result = 4000;
-      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
       if (aPerfomance.audience > 30) {
-
-        // [ 2) Перименование thisAmount в result ]
-        // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
         result += 1000 * (aPerfomance.audience - 30);
       }
       break;
 
     case 'comedy':
-      // [ 2) Перименование thisAmount в result ]
       result = 30000;
-      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
       if (aPerfomance.audience > 20) {
-        // [ 2) Перименование thisAmount в result ]
-        // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
         result += 1000 + 500 * (aPerfomance.audience - 20);
       }
-      // [ 2) Перименование thisAmount в result ]
-      // [ 3) Имя параметра влючает в себя имя типа; a - неопределенный артикль = нет информации; Переименование perf в aPerfomance ]
       result += 300 * aPerfomance.audience;
       break;
 
@@ -138,22 +75,18 @@ function amountFor(aPerfomance, play) {
       throw new Error(`unknown type: ${play.type}`);
   }
 
-  // [ 2) Перименование thisAmount в result ]
   return result;
 }
 
-// [ 4) Замена временной переменной ]
 function playFor(aPerformance){
   return plays[aPerformance.playID]
 }
 
-// [ 11) rename function]
 function usd(aNumber){
   return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-      // [ 12) division /100 ]
     }).format(aNumber/100);
 }
 
