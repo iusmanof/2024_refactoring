@@ -36,7 +36,9 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice[0].performances) {
-    const play = plays[perf.playID];
+    // [ 4) Замена временной переменной ]
+    // const play = plays[perf.playID];
+    const play = playFor(perf);
 
     // [ 1) Перенос кода в функцию amountFor() ]
     let thisAmount = amountFor(perf, play);
@@ -115,6 +117,11 @@ function amountFor(aPerfomance, play) {
 
   // [ 2) Перименование thisAmount в result ]
   return result;
+}
+
+// [ 4) Замена временной переменной ]
+function playFor(aPerformance){
+  return plays[aPerformance.playID]
 }
 
 const result = statement(invoices, plays);
