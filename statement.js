@@ -24,6 +24,15 @@ const plays = {
   othello: { name: 'Othello', type: 'tragedy' },
 };
 
+// [ 8) замена переменной volumeCredits]
+function volumeCreditsFor(perf){
+  let volumeCredits = 0;
+  volumeCredits += Math.max(perf.audience - 30, 0);
+    
+  if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+  return volumeCredits;
+}
+
 function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
@@ -36,6 +45,8 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice[0].performances) {
+    // [ 8) замена переменной volumeCredits]
+    volumeCredits += volumeCreditsFor(perf)
     // [ 4) Замена временной переменной ]
     // const play = plays[perf.playID];
     // const play = playFor(perf);
@@ -64,10 +75,11 @@ function statement(invoice, plays) {
     //         throw new Error (`unknown type: ${play.type}`)
     // }
 
-    volumeCredits += Math.max(perf.audience - 30, 0);
+    // [ 8) замена переменной volumeCredits]
+    // volumeCredits += Math.max(perf.audience - 30, 0);
     
-    // [ 5) встраивание переменной playFor(perf)]
-    if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+    // // [ 5) встраивание переменной playFor(perf)]
+    // if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
     // [ 5) встраивание переменной playFor(perf)]
     // [ 7) встраивание переменной amountFor(perf)]
