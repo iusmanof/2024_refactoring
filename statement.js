@@ -86,7 +86,8 @@ function amountFor(aPerfomance, play) {
   // [ 2) Перименование thisAmount в result ]
   let result = 0;
 
-  switch (play.type) {
+  // [ 6) изменение обьявления функции playFor(aPerfomance)]
+  switch (playFor(aPerfomance).type) {
     case 'tragedy':
 
       // [ 2) Перименование thisAmount в result ]
