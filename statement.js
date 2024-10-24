@@ -39,11 +39,12 @@ function statement(invoice, plays) {
   let volumeCredits = 0;
 
   let result = `Statement for ${invoice[0].customer}\n`;
-  const format = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format;
+  // [ 10) замена временной переменной format(aNumber)]
+  // const format = new Intl.NumberFormat('en-US', {
+  //   style: 'currency',
+  //   currency: 'USD',
+  //   minimumFractionDigits: 2,
+  // }).format;
 
   for (let perf of invoice[0].performances) {
     // [ 8) замена переменной volumeCredits]
@@ -141,6 +142,14 @@ function amountFor(aPerfomance, play) {
 // [ 4) Замена временной переменной ]
 function playFor(aPerformance){
   return plays[aPerformance.playID]
+}
+
+function format(aNumber){
+  return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    }).format(aNumber);
 }
 
 const result = statement(invoices, plays);
