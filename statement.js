@@ -86,13 +86,15 @@ function statement(invoice, plays) {
     // [ 5) встраивание переменной playFor(perf)]
     // [ 7) встраивание переменной amountFor(perf)]
     // [ 11) rename function]
-    result += `   ${playFor(perf).name}: ${usd(amountFor(perf) / 100)}`;
+    // [ 12) division /100 ]
+    result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
     result += `   (${perf.audience} seats)\n`;
     // [ 7) встраивание переменной amountFor(perf)]
     totalAmount += amountFor(perf);
   }
   // [ 11) rename function]
-  result += `Amount owed is ${usd(totalAmount / 100)}\n`;
+  // [ 12) division /100 ]
+  result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
@@ -151,7 +153,8 @@ function usd(aNumber){
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2,
-    }).format(aNumber);
+      // [ 12) division /100 ]
+    }).format(aNumber/100);
 }
 
 const result = statement(invoices, plays);
