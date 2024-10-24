@@ -70,9 +70,11 @@ function statement(invoice, plays) {
     if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
     // [ 5) встраивание переменной playFor(perf)]
-    result += `   ${playFor(perf).name}: ${format(thisAmount / 100)}`;
+    // [ 7) встраивание переменной amountFor(perf)]
+    result += `   ${playFor(perf).name}: ${format(amountFor(perf) / 100)}`;
     result += `   (${perf.audience} seats)\n`;
-    totalAmount += thisAmount;
+    // [ 7) встраивание переменной amountFor(perf)]
+    totalAmount += amountFor(perf);
   }
 
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
