@@ -85,13 +85,14 @@ function statement(invoice, plays) {
 
     // [ 5) встраивание переменной playFor(perf)]
     // [ 7) встраивание переменной amountFor(perf)]
-    result += `   ${playFor(perf).name}: ${format(amountFor(perf) / 100)}`;
+    // [ 11) rename function]
+    result += `   ${playFor(perf).name}: ${usd(amountFor(perf) / 100)}`;
     result += `   (${perf.audience} seats)\n`;
     // [ 7) встраивание переменной amountFor(perf)]
     totalAmount += amountFor(perf);
   }
-
-  result += `Amount owed is ${format(totalAmount / 100)}\n`;
+  // [ 11) rename function]
+  result += `Amount owed is ${usd(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 }
@@ -144,7 +145,8 @@ function playFor(aPerformance){
   return plays[aPerformance.playID]
 }
 
-function format(aNumber){
+// [ 11) rename function]
+function usd(aNumber){
   return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
