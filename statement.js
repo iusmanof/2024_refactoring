@@ -38,10 +38,11 @@ function statement(invoice, plays) {
   for (let perf of invoice[0].performances) {
     // [ 4) Замена временной переменной ]
     // const play = plays[perf.playID];
-    const play = playFor(perf);
+    // const play = playFor(perf);
 
     // [ 1) Перенос кода в функцию amountFor() ]
-    let thisAmount = amountFor(perf, play);
+    // [ 5) встраивание переменной playFor(perf)]
+    let thisAmount = amountFor(perf, playFor(perf));
     // let thisAmount = 0
 
     // switch(play.type){
@@ -64,10 +65,12 @@ function statement(invoice, plays) {
     // }
 
     volumeCredits += Math.max(perf.audience - 30, 0);
+    
+    // [ 5) встраивание переменной playFor(perf)]
+    if ('comedy' === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
-    if ('comedy' === play.type) volumeCredits += Math.floor(perf.audience / 5);
-
-    result += `   ${play.name}: ${format(thisAmount / 100)}`;
+    // [ 5) встраивание переменной playFor(perf)]
+    result += `   ${playFor(perf).name}: ${format(thisAmount / 100)}`;
     result += `   (${perf.audience} seats)\n`;
     totalAmount += thisAmount;
   }
