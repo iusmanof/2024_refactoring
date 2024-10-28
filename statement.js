@@ -34,7 +34,7 @@ function volumeCreditsFor(aPerfomance){
 
 function statement(invoice, plays) {
   let totalAmount = 0;
-  let volumeCredits = 0;
+  
 
   let result = `Statement for ${invoice[0].customer}\n`;
 
@@ -47,6 +47,8 @@ function statement(invoice, plays) {
     result += `   (${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
+  // [ moving instruction ]
+  let volumeCredits = 0;
   // [ cycle separaion ]
   for (let perf of invoice[0].performances){
     volumeCredits += volumeCreditsFor(perf)
