@@ -24,22 +24,16 @@ const plays = {
   othello: { name: 'Othello', type: 'tragedy' },
 };
 
-function volumeCreditsFor(aPerfomance) {
-  let result = 0;
-  result += Math.max(aPerfomance.audience - 30, 0);
-
-  if ('comedy' === playFor(aPerfomance).type)
-    result += Math.floor(aPerfomance.audience / 5);
-  return result;
-}
-
-function totalVolumeCredits(invoice) {
-  let result = 0;
+function statement(invoice, plays) {
+  let result = `Statement for ${invoice[0].customer}\n`;
 
   for (let perf of invoice[0].performances) {
-    result += volumeCreditsFor(perf);
+    result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
+    result += `   (${perf.audience} seats)\n`;
   }
 
+  result += `Amount owed is ${usd(totalAmount(invoice))}\n`;
+  result += `You earned ${totalVolumeCredits(invoice)} credits\n`;
   return result;
 }
 
@@ -53,17 +47,35 @@ function totalAmount(invoice) {
   return result;
 }
 
-function statement(invoice, plays) {
-  let result = `Statement for ${invoice[0].customer}\n`;
+function totalVolumeCredits(invoice) {
+  let result = 0;
 
   for (let perf of invoice[0].performances) {
-    result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
-    result += `   (${perf.audience} seats)\n`;
+    result += volumeCreditsFor(perf);
   }
 
-  result += `Amount owed is ${usd(totalAmount(invoice))}\n`;
-  result += `You earned ${totalVolumeCredits(invoice)} credits\n`;
   return result;
+}
+
+function usd(aNumber) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(aNumber / 100);
+}
+
+function volumeCreditsFor(aPerfomance) {
+  let result = 0;
+  result += Math.max(aPerfomance.audience - 30, 0);
+
+  if ('comedy' === playFor(aPerfomance).type)
+    result += Math.floor(aPerfomance.audience / 5);
+  return result;
+}
+
+function playFor(aPerformance) {
+  return plays[aPerformance.playID];
 }
 
 function amountFor(aPerfomance, play) {
@@ -90,18 +102,6 @@ function amountFor(aPerfomance, play) {
   }
 
   return result;
-}
-
-function playFor(aPerformance) {
-  return plays[aPerformance.playID];
-}
-
-function usd(aNumber) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(aNumber / 100);
 }
 
 const result = statement(invoices, plays);
