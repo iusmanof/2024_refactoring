@@ -24,11 +24,12 @@ const plays = {
   othello: { name: 'Othello', type: 'tragedy' },
 };
 
-function volumeCreditsFor(aPerfomance){
+function volumeCreditsFor(aPerfomance) {
   let result = 0;
   result += Math.max(aPerfomance.audience - 30, 0);
-    
-  if ('comedy' === playFor(aPerfomance).type) result += Math.floor(aPerfomance.audience / 5);
+
+  if ('comedy' === playFor(aPerfomance).type)
+    result += Math.floor(aPerfomance.audience / 5);
   return result;
 }
 
@@ -37,17 +38,16 @@ function statement(invoice, plays) {
   let result = `Statement for ${invoice[0].customer}\n`;
 
   for (let perf of invoice[0].performances) {
-
     result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
     result += `   (${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
 
   let volumeCredits = 0;
-  for (let perf of invoice[0].performances){
-    volumeCredits += volumeCreditsFor(perf)
+  for (let perf of invoice[0].performances) {
+    volumeCredits += volumeCreditsFor(perf);
   }
-  
+
   result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
@@ -58,7 +58,6 @@ function amountFor(aPerfomance, play) {
 
   switch (playFor(aPerfomance).type) {
     case 'tragedy':
-
       result = 4000;
       if (aPerfomance.audience > 30) {
         result += 1000 * (aPerfomance.audience - 30);
@@ -80,16 +79,16 @@ function amountFor(aPerfomance, play) {
   return result;
 }
 
-function playFor(aPerformance){
-  return plays[aPerformance.playID]
+function playFor(aPerformance) {
+  return plays[aPerformance.playID];
 }
 
-function usd(aNumber){
+function usd(aNumber) {
   return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(aNumber/100);
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(aNumber / 100);
 }
 
 const result = statement(invoices, plays);
