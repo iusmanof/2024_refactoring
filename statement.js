@@ -34,23 +34,23 @@ function volumeCreditsFor(aPerfomance) {
 }
 
 function totalVolumeCredits(invoice) {
-  let volumeCredits = 0;
+  let result = 0;
 
   for (let perf of invoice[0].performances) {
-    volumeCredits += volumeCreditsFor(perf);
+    result += volumeCreditsFor(perf);
   }
 
-  return volumeCredits;
+  return result;
 }
 
 function appleSauce(invoice) {
-  let totalAmount = 0;
+  let result = 0;
 
   for (let perf of invoice[0].performances) {
-    totalAmount += amountFor(perf);
+    result += amountFor(perf);
   }
 
-  return totalAmount;
+  return result;
 }
 
 function statement(invoice, plays) {
