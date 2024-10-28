@@ -34,25 +34,20 @@ function volumeCreditsFor(aPerfomance){
 
 function statement(invoice, plays) {
   let totalAmount = 0;
-  
-
   let result = `Statement for ${invoice[0].customer}\n`;
 
   for (let perf of invoice[0].performances) {
-    // [ cycle separaion ]
-    // volumeCredits += volumeCreditsFor(perf)
-    // let thisAmount = amountFor(perf, playFor(perf));
 
     result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
     result += `   (${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
-  // [ moving instruction ]
+
   let volumeCredits = 0;
-  // [ cycle separaion ]
   for (let perf of invoice[0].performances){
     volumeCredits += volumeCreditsFor(perf)
   }
+  
   result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
