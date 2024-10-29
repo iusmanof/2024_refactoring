@@ -104,7 +104,5 @@ function amountFor(aPerfomance, play) {
   return result;
 }
 
-const result = statement(invoices, plays);
-console.log(result);
-
+statement(invoices, plays);
 module.exports = { statement, invoices, plays };
