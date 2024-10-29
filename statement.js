@@ -27,8 +27,13 @@ const plays = {
 function statement(invoice, plays) {
   const statementData = {}
   statementData.customer = invoice[0].customer
-  statementData.performances = invoice[0].performances
+  statementData.performances = invoice[0].performances.map(enrichPerformance)
   return renderPlainText(statementData, invoice, plays)
+}
+
+function enrichPerformance(aPerfomance){
+  const result = Object.assign({}, aPerfomance)
+  return result
 }
 
 function renderPlainText(data, invoice, plays) {
