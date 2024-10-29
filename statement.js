@@ -25,36 +25,39 @@ const plays = {
 };
 
 function statement(invoice, plays) {
-  return renderPlainText(invoice, plays)
+  const statementData = {}
+  statementData.customer = invoice[0].customer
+  statementData.performances = invoice[0].performances
+  return renderPlainText(statementData, invoice, plays)
 }
 
-function renderPlainText(invoice, plays) {
-  let result = `Statement for ${invoice[0].customer}\n`;
+function renderPlainText(data, invoice, plays) {
+  let result = `Statement for ${data.customer}\n`;
 
-  for (let perf of invoice[0].performances) {
+  for (let perf of data.performances) {
     result += `   ${playFor(perf).name}: ${usd(amountFor(perf))}`;
     result += `   (${perf.audience} seats)\n`;
   }
 
-  result += `Amount owed is ${usd(totalAmount(invoice))}\n`;
-  result += `You earned ${totalVolumeCredits(invoice)} credits\n`;
+  result += `Amount owed is ${usd(totalAmount(data))}\n`;
+  result += `You earned ${totalVolumeCredits(data)} credits\n`;
   return result;
 }
 
-function totalAmount(invoice) {
+function totalAmount(data) {
   let result = 0;
 
-  for (let perf of invoice[0].performances) {
+  for (let perf of data.performances) {
     result += amountFor(perf);
   }
 
   return result;
 }
 
-function totalVolumeCredits(invoice) {
+function totalVolumeCredits(data) {
   let result = 0;
 
-  for (let perf of invoice[0].performances) {
+  for (let perf of data.performances) {
     result += volumeCreditsFor(perf);
   }
 
