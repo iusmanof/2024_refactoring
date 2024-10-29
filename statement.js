@@ -25,6 +25,10 @@ const plays = {
 };
 
 function statement(invoice, plays) {
+  return renderPlainText(invoice, plays)
+}
+
+function renderPlainText(invoice, plays) {
   let result = `Statement for ${invoice[0].customer}\n`;
 
   for (let perf of invoice[0].performances) {
