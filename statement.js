@@ -28,6 +28,8 @@ function statement(invoice, plays) {
   const statementData = {}
   statementData.customer = invoice[0].customer
   statementData.performances = invoice[0].performances.map(enrichPerformance)
+  statementData.totalAmount = totalAmount(statementData)
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
   return renderPlainText(statementData, invoice, plays)
 }
 
@@ -47,8 +49,8 @@ function renderPlainText(data, invoice, plays) {
     result += `   (${perf.audience} seats)\n`;
   }
 
-  result += `Amount owed is ${usd(totalAmount(data))}\n`;
-  result += `You earned ${totalVolumeCredits(data)} credits\n`;
+  result += `Amount owed is ${usd(data.totalAmount)}\n`;
+  result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
 }
 
