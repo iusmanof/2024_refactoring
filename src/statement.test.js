@@ -1,4 +1,4 @@
-const { statement, invoices, plays } = require('./statement'); // no .js
+import { statement, invoices, plays } from './statement'; // no .js
 
 test('correctly generates statement for BigCo', () => {
   const expectedOutput =
