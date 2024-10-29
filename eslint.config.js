@@ -17,5 +17,4 @@ const config = {
   ignores: ['**/*.test.js', 'node_modules/', 'dist/'],
 };
 
-// Use export instead of module.exports
 export default config;
