@@ -27,6 +27,23 @@ export const plays = {
 };
 
 export function statement(invoice, plays) {
+  return renderPlainText(createStatementData(invoice, plays));
+}
+
+function renderPlainText(data, invoice, plays) {
+  let result = `Statement for ${data.customer}\n`;
+
+  for (let perf of data.performances) {
+    result += `   ${perf.play.name}: ${usd(perf.amount)}`;
+    result += `   (${perf.audience} seats)\n`;
+  }
+
+  result += `Amount owed is ${usd(data.totalAmount)}\n`;
+  result += `You earned ${data.totalVolumeCredits} credits\n`;
+  return result;
+}
+
+export function htmlStatement(invoice, plays) {
   return renderHtml(createStatementData(invoice, plays));
 }
 
