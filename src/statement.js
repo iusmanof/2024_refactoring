@@ -32,19 +32,17 @@ export function statement(invoice, plays) {
 
 function renderHtml(data) {
   let result = `<h1>Statement for ${data.customer}</h1>\n`;
-  result += `<table>\n`
-  result += `<tr><th>play</th><th>seats</th><th>cost</th></tr>\n`
+  result += '<table>\n';
+  result += '<tr><th>play</th><th>seats</th><th>cost</th></tr>\n';
   for (let perf of data.performances) {
-    result += `<tr><td>${perf.play.name}</td>`
-    result += `<td>${usd(perf.amount)}</td>`
-    result += `<td>${perf.audience}</td></tr>\n`
-    // result += `   ${perf.play.name}: ${usd(perf.amount)}`;
-    // result += `   (${perf.audience} seats)\n`;
+    result += `<tr><td>${perf.play.name}</td>`;
+    result += `<td>${usd(perf.amount)}</td>`;
+    result += `<td>${perf.audience}</td></tr>\n`;
   }
 
   result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
   result += `<p>You earned <em>${data.totalVolumeCredits}</em> credits</p>\n`;
-  result += `</table>\n`
+  result += '</table>\n';
   return result;
 }
 
