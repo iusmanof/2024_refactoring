@@ -84,7 +84,3 @@ function totalVolumeCredits(data) {
 function playFor(aPerformance) {
   return plays[aPerformance.playID];
 }
-
-function amountFor(aPerformance) {
-  return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
-}
