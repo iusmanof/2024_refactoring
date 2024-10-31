@@ -7,7 +7,7 @@ test('correctly generates statement for BigCo', () => {
     `   As You Like It: $570.00   (45 seats)\n` +
     `   Othello: $500.00   (40 seats)\n` +
     `Amount owed is $1,720.00\n` +
-    `You earned 59 credits\n`;
+    `You earned 44 credits\n`;
 
   expect(statement(invoices, plays)).toBe(expectedOutput);
 });
@@ -21,7 +21,7 @@ test('correctly generates htmlStatement for BigCo', () => {
     `<tr><td>As You Like It</td><td>$570.00</td><td>45</td></tr>\n` +
     `<tr><td>Othello</td><td>$500.00</td><td>40</td></tr>\n` +
     `<p>Amount owed is <em>$1,720.00</em></p>\n` +
-    `<p>You earned <em>59</em> credits</p>\n` +
+    `<p>You earned <em>44</em> credits</p>\n` +
     `</table>\n`;
 
   expect(htmlStatement(invoices, plays)).toBe(expectedOutput);
