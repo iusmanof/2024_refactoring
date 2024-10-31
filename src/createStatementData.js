@@ -10,11 +10,18 @@ export function createStatementData(invoice, plays) {
 }
 
 function enrichPerformance(aPerfomance) {
+  const calculator = new PerformanceCalculator(aPerfomance)
   const result = Object.assign({}, aPerfomance);
   result.play = playFor(result);
   result.amount = amountFor(result);
   result.volumeCredits = volumeCreditsFor(result);
   return result;
+}
+
+class PerformanceCalculator {
+  constructor(aPerfomance){
+    this.performance = aPerfomance
+  }
 }
 
 function totalAmount(data) {
